@@ -1,20 +1,21 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-signup',
-    imports: [],
+    imports: [FormsModule],
     templateUrl: './signup.html',
     styleUrl: './signup.css'
 })
 export class Signup {
-    firstName = "";
-    lastName = "";
-    email = "";
-    passWord = "";
-    confirmPassword = "";
+    firstName: string = "";
+    lastName: string = "";
+    email:string = "";
+    passWord:string = "";
+    confirmPassword:string = "";
 
     register() {
-        console.log('register is working');
+        console.log(this.firstName, this.lastName, this.email, this.passWord, this.confirmPassword);
         
     }
 }

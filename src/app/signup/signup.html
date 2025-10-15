@@ -2,23 +2,23 @@
     <h3 class="text-center text-decoration-underline my-lg-4 my-2">Get Started</h3>
     <div class="form-group my-2 px-3">
         <label for="" class="form-label fw-semibold">First Name</label>
-        <input type="text" class="form-control shadow-none border border-dark border-2"/>
+        <input type="text" class="form-control shadow-none border border-dark border-2" [(ngModel)]="firstName"/>
     </div>
     <div class="form-group my-2 px-3">
         <label for="" class="form-label fw-semibold">Last Name</label>
-        <input type="text" class="form-control shadow-none border border-dark border-2"/>
+        <input type="text" class="form-control shadow-none border border-dark border-2" [(ngModel)]="lastName"/>
     </div>
     <div class="form-group my-2 px-3">
         <label for="" class="form-label fw-semibold">Email</label>
-        <input type="text" class="form-control shadow-none border border-dark border-2"/>
+        <input type="email" class="form-control shadow-none border border-dark border-2" [(ngModel)]="email"/>
     </div>
     <div class="form-group my-2 px-3">
         <label for="" class="form-label fw-semibold">Password</label>
-        <input type="text" class="form-control shadow-none border border-dark border-2"/>
+        <input type="password" class="form-control shadow-none border border-dark border-2" [(ngModel)]="passWord"/>
     </div>
     <div class="form-group my-2 px-3">
         <label for="" class="form-label fw-semibold">Confirm Password</label>
-        <input type="text" class="form-control shadow-none border border-dark border-2"/>
+        <input type="password" class="form-control shadow-none border border-dark border-2" [(ngModel)]="confirmPassword"/>
     </div>
     <div class="form-group my-2 px-3">
         <button class="btn btn-dark w-100 my-3 fw-semibold" (click)="register()">Register</button>
