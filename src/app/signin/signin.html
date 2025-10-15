@@ -1,1 +1,19 @@
-<p>signin works!</p>
+<div class="container-fluid shadow-sm rounded-4 mt-lg-5 mt-3 p-3 col-lg-6 col-md-9 col-10 border border-dark border-4 bg-light">
+    <h3 class="text-center text-decoration-underline my-lg-4 my-2">Log In</h3>
+    <form action="" [formGroup]="signInForm">
+        <div class="form-group my-2 px-3">
+            <label for="" class="form-label fw-semibold">Email</label>
+            <input type="email" class="form-control shadow-none border border-dark border-2" formControlName="email"/>
+        </div>
+        <div class="form-group my-2 px-3">
+            <label for="" class="form-label fw-semibold">Password</label>
+            <input type="password" class="form-control shadow-none border border-dark border-2" formControlName="passWord"/>
+        </div>
+        <div class="form-group my-2 px-3">
+            <button class="btn btn-dark w-100 my-3 fw-semibold" (click)="logIn()" [disabled]="!signInForm.valid">Log In</button>
+        </div>
+    </form>
+    <div class="form-group text-center">
+        <p>New to HireMe™? <a href="signup">Register</a></p>
+    </div>
+</div>
