@@ -8,13 +8,16 @@ import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
     styleUrl: './signup.css'
 })
 export class Signup {
-    private builder = inject(FormBuilder)
+    private builder = inject(FormBuilder);
+    
+    signUPForm = this.builder.group({
+        firstName = "",
+        lastName = "",
+        email = "",
+        passWord = "",
+        confirmPassword = ""
+    })
 
-    firstName: string = "";
-    lastName: string = "";
-    email:string = "";
-    passWord:string = "";
-    confirmPassword:string = "";
 
     register() {
         console.log(this.firstName, this.lastName, this.email, this.passWord, this.confirmPassword);
