@@ -7,6 +7,12 @@ import { Component } from '@angular/core';
     styleUrl: './signup.css'
 })
 export class Signup {
+    firstName = "";
+    lastName = "";
+    email = "";
+    passWord = "";
+    confirmPassword = "";
+
     register() {
         console.log('register is working');
         
