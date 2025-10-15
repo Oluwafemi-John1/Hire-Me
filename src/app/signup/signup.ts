@@ -1,13 +1,15 @@
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-signup',
-    imports: [FormsModule],
+    imports: [FormsModule, ReactiveFormsModule],
     templateUrl: './signup.html',
     styleUrl: './signup.css'
 })
 export class Signup {
+    private builder = inject(FormBuilder)
+
     firstName: string = "";
     lastName: string = "";
     email:string = "";
