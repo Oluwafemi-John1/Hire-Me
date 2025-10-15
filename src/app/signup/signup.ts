@@ -10,7 +10,7 @@ import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 export class Signup {
     private builder = inject(FormBuilder);
     
-    signUPForm = this.builder.group({
+    signUpForm = this.builder.group({
         firstName: [""],
         lastName: [""],
         email: [""],
