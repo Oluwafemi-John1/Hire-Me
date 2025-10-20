@@ -1,22 +1,64 @@
-<div class="container-fluid shadow-sm rounded-4 mt-lg-5 mt-3 p-3 col-lg-6 col-md-9 col-10 border border-dark border-4 bg-light">
-    <a routerLink="/" class="">
-        <img src="assets/hireme.png" width="100" alt="My Logo" class="img-fluid">
-    </a>
-    <h3 class="text-center text-decoration-underline my-lg-4 my-2">Log In</h3>
-    <form action="" [formGroup]="signInForm">
-        <div class="form-group my-2 px-3">
-            <label for="" class="form-label fw-semibold">Email</label>
-            <input type="email" class="form-control shadow-none border border-dark border-2" formControlName="email"/>
+<div class="min-vh-100 d-flex align-items-center py-5" style="background-color: #f8faf9;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5 col-md-7 col-11">
+                <div class="bg-white rounded-4 p-4 p-lg-5" data-aos="fade-up">
+                    <!-- Logo Section -->
+                    <div class="text-center mb-4">
+                        <a routerLink="/" class="d-inline-block text-decoration-none text-dark">
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="logo-box bg-success rounded d-flex align-items-center justify-content-center"
+                                    style="width: 40px; height: 40px;">
+                                    <i class="bi bi-briefcase-fill text-white"></i>
+                                </div>
+                                <span class="fw-bold fs-4">HireMe</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Title Section -->
+                    <div class="text-center mb-4" data-aos="fade-up" data-aos-delay="100">
+                        <h2 class="fw-bold">Welcome Back</h2>
+                        <p class="text-secondary">Sign in to your professional account</p>
+                    </div>
+
+                    <!-- Form Section -->
+                    <form [formGroup]="signInForm" data-aos="fade-up" data-aos-delay="200">
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="form-label small fw-semibold text-secondary">Email Address</label>
+                                    <input type="email" class="form-control form-control-lg shadow-none"
+                                        [class.is-invalid]="signInForm.get('email')?.invalid && signInForm.get('email')?.touched"
+                                        formControlName="email" placeholder="Enter your email" />
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="form-label small fw-semibold text-secondary">Password</label>
+                                    <input type="password" class="form-control form-control-lg shadow-none"
+                                        [class.is-invalid]="signInForm.get('passWord')?.invalid && signInForm.get('passWord')?.touched"
+                                        formControlName="passWord" placeholder="Enter your password" />
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-success btn-lg w-100 fw-semibold mt-3" (click)="logIn()"
+                                    [disabled]="!signInForm.valid">
+                                    Sign In
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Footer Section -->
+                    <div class="text-center mt-4" data-aos="fade-up" data-aos-delay="300">
+                        <p class="mb-0 text-secondary">Don't have an account?
+                            <a routerLink="/signup" class="text-success fw-semibold text-decoration-none">Create
+                                Account</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="form-group my-2 px-3">
-            <label for="" class="form-label fw-semibold">Password</label>
-            <input type="password" class="form-control shadow-none border border-dark border-2" formControlName="passWord"/>
-        </div>
-        <div class="form-group my-2 px-3">
-            <button class="btn btn-dark w-100 my-3 fw-semibold" (click)="logIn()" [disabled]="!signInForm.valid">Log In</button>
-        </div>
-    </form>
-    <div class="form-group text-center">
-        <p>New to HireMe™? <a routerLink="/signup" class="text-decoration-none">Register</a></p>
     </div>
 </div>

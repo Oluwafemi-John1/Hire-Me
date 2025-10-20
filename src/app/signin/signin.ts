@@ -1,6 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import * as AOS from 'aos';
 
 @Component({
     selector: 'app-signin',
@@ -8,8 +9,16 @@ import { RouterLink } from '@angular/router';
     templateUrl: './signin.html',
     styleUrl: './signin.css'
 })
-export class Signin {
+export class Signin implements OnInit {
     private builder = inject(FormBuilder)
+
+    ngOnInit() {
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+    }
 
     signInForm = this.builder.group({
         email: ["", [Validators.required, Validators.email]],
