@@ -10,8 +10,11 @@ import * as AOS from 'aos';
     styleUrl: './signup.css',
     standalone: true
 })
+
+
 export class Signup implements OnInit {
     private builder = inject(FormBuilder);
+    users: any = [];
 
     ngOnInit() {
         AOS.init({
@@ -32,6 +35,8 @@ export class Signup implements OnInit {
 
     register() {
         // console.log(this.firstName, this.lastName, this.email, this.passWord, this.confirmPassword);
-        console.log(this.signUpForm.valid);
+        // console.log(this.signUpForm.valid);
+        this.users.push(this.signUpForm.value)
+        localStorage['users'] = JSON.stringify(this.signUpForm.value);
     }
 }
