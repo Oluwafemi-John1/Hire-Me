@@ -22,6 +22,8 @@ export class Signup implements OnInit {
             once: true,
             offset: 50
         });
+
+        this.users = localStorage['users'] ? JSON.parse(localStorage['users']) : []
     }
 
     signUpForm = this.builder.group({
@@ -37,6 +39,6 @@ export class Signup implements OnInit {
         // console.log(this.firstName, this.lastName, this.email, this.passWord, this.confirmPassword);
         // console.log(this.signUpForm.valid);
         this.users.push(this.signUpForm.value)
-        localStorage['users'] = JSON.stringify(this.signUpForm.value);
+        localStorage['users'] = JSON.stringify(this.users);
     }
 }
