@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="HireMe favicon">
+  <title>HireMe</title>
+  <rect width="64" height="64" rx="12" fill="#f8faf9" />
+  <circle cx="32" cy="32" r="28" fill="#198754" />
+  <!-- briefcase body -->
+  <rect x="14" y="28" width="36" height="18" rx="3" fill="#ffffff" />
+  <!-- briefcase handle -->
+  <rect x="24" y="20" width="16" height="6" rx="3" fill="#ffffff" />
+  <!-- clasp -->
+  <rect x="30" y="34" width="4" height="6" rx="1" fill="#198754" />
+</svg>
