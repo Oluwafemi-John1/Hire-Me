@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
     selector: 'app-homepage',
@@ -9,5 +9,13 @@ import { RouterLink } from '@angular/router';
     standalone: true
 })
 export class Homepage {
+    private router = inject(Router)
 
+    signUp() {
+        this.router.navigate(['/signup'])
+    }
+
+    signIn() {
+        this.router.navigate(['/signin'])
+    }
 }
