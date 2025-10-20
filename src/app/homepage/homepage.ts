@@ -1,5 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import * as AOS from 'aos';
 
 @Component({
     selector: 'app-homepage',
@@ -8,8 +9,17 @@ import { Router, RouterLink } from '@angular/router';
     styleUrl: './homepage.css',
     standalone: true
 })
-export class Homepage {
-    private router = inject(Router)
+export class Homepage implements OnInit {
+    private router = inject(Router);
+
+    ngOnInit() {
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100,
+            easing: 'ease-in-out'
+        });
+    }
 
     signUp() {
         this.router.navigate(['/signup'])
