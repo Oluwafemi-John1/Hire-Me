@@ -1,0 +1,82 @@
+.form-control {
+    border: 1px solid #e5e7eb;
+    padding: 0.75rem 1rem;
+    transition: all 0.2s ease;
+}
+
+.form-control:focus {
+    border-color: #10b981;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.form-control.is-invalid {
+    border-color: #ef4444;
+    box-shadow: none;
+}
+
+.form-control.is-invalid:focus {
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.btn-success {
+    background-color: #10b981;
+    border-color: #10b981;
+    transition: all 0.2s ease;
+}
+
+.btn-success:hover:not(:disabled) {
+    background-color: #059669;
+    border-color: #059669;
+    transform: translateY(-1px);
+}
+
+.btn-success:disabled {
+    background-color: #10b981;
+    border-color: #10b981;
+    opacity: 0.65;
+}
+
+/* Logo animation */
+.logo-box {
+    transition: transform 0.3s ease;
+}
+
+a:hover .logo-box {
+    transform: scale(1.1);
+}
+
+/* Form animations */
+.form-control {
+    transform-origin: left;
+    animation: formIn 0.4s ease forwards;
+}
+
+@keyframes formIn {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #10b981;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #059669;
+}
