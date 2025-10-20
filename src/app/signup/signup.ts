@@ -40,5 +40,10 @@ export class Signup implements OnInit {
         // console.log(this.signUpForm.valid);
         this.users.push(this.signUpForm.value)
         localStorage['users'] = JSON.stringify(this.users);
+        this.signUpForm.value.firstName = ''
+        this.signUpForm.value.lastName = ''
+        this.signUpForm.value.email = ''
+        this.signUpForm.value.passWord = ''
+        this.signUpForm.value.confirmPassword = ''
     }
 }
