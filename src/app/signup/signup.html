@@ -31,6 +31,11 @@
                                     <input type="text" class="form-control form-control-lg shadow-none"
                                         [class.is-invalid]="signUpForm.get('firstName')?.invalid && signUpForm.get('firstName')?.touched"
                                         formControlName="firstName" placeholder="Enter your first name" />
+                                    @if (signUpForm.get('firstName')?.hasError('minlength') && signUpForm.get('firstName')?.touched) {
+                                        <small class="text-danger">First Name cannot be less than 2 characters</small>
+                                    } @else if (signUpForm.get('firstName')?.hasError('required') && signUpForm.get('firstName')?.touched) {
+                                        <small class="text-danger">First Name cannot be empty</small>
+                                    }
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -39,6 +44,11 @@
                                     <input type="text" class="form-control form-control-lg shadow-none"
                                         [class.is-invalid]="signUpForm.get('lastName')?.invalid && signUpForm.get('lastName')?.touched"
                                         formControlName="lastName" placeholder="Enter your last name" />
+                                    @if (signUpForm.get('lastName')?.hasError('minlength') && signUpForm.get('lastName')?.touched) {
+                                        <small class="text-danger">Last Name cannot be less than 2 characters</small>
+                                    } @else if (signUpForm.get('lastName')?.hasError('required') && signUpForm.get('lastName')?.touched) {
+                                        <small class="text-danger">Last Name cannot be empty</small>
+                                    }
                                 </div>
                             </div>
                             <div class="col-12">
