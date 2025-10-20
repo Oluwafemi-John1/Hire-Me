@@ -29,7 +29,7 @@
                                 <div class="form-group">
                                     <label class="form-label small fw-semibold text-secondary">Email Address</label>
                                     <input type="email" class="form-control form-control-lg shadow-none"
-                                        [class.is-invalid]="signInForm.get('email')?.invalid && signInForm.get('email')?.touched"
+                                        [class.is-invalid]="signInForm.get('email')?.invalid && signInForm.get('email')?.touched" [class.is-valid]="!signInForm.get('email')?.invalid && signInForm.get('email')?.touched"
                                         formControlName="email" placeholder="Enter your email" />
                                     @if (signInForm.get('email')?.hasError('email') && signInForm.get('email')?.touched) {
                                         <small class="text-danger">Must be a valid email address</small>
@@ -42,7 +42,7 @@
                                 <div class="form-group">
                                     <label class="form-label small fw-semibold text-secondary">Password</label>
                                     <input type="password" class="form-control form-control-lg shadow-none"
-                                        [class.is-invalid]="signInForm.get('passWord')?.invalid && signInForm.get('passWord')?.touched"
+                                        [class.is-invalid]="signInForm.get('passWord')?.invalid && signInForm.get('passWord')?.touched" [class.is-valid]="!signInForm.get('passWord')?.invalid && signInForm.get('passWord')?.touched"
                                         formControlName="passWord" placeholder="Enter your password" />
                                     @if (signInForm.get('passWord')?.hasError('required') && signInForm.get('passWord')?.touched) {
                                         <small class="text-danger">Password cannot be empty</small>
