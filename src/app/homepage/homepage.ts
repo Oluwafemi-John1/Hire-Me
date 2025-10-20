@@ -11,6 +11,7 @@ import * as AOS from 'aos';
 })
 export class Homepage implements OnInit {
     private router = inject(Router);
+    year = new Date().getFullYear()
 
     ngOnInit() {
         AOS.init({
