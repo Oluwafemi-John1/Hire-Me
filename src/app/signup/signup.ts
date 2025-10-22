@@ -15,6 +15,7 @@ import * as AOS from 'aos';
 export class Signup implements OnInit {
     private builder = inject(FormBuilder);
     users: any = [];
+    sameAs: boolean = false
 
     ngOnInit() {
         AOS.init({
@@ -46,5 +47,13 @@ export class Signup implements OnInit {
         this.signUpForm.value.email = ''
         this.signUpForm.value.passWord = ''
         this.signUpForm.value.confirmPassword = ''
+    }
+
+    confirmPassword() {
+        console.log(this.signUpForm.value.confirmPassword);
+        
+        if (this.signUpForm.value.confirmPassword === this.signUpForm.value.passWord) {
+            this.sameAs = true
+        }
     }
 }

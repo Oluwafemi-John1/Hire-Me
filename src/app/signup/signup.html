@@ -82,14 +82,19 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label class="form-label small fw-semibold text-secondary">Confirm Password</label>
-                                    <input type="password" class="form-control form-control-lg shadow-none"
-                                        [class.is-invalid]="signUpForm.get('confirmPassword')?.invalid && (signUpForm.get('confirmPassword')?.touched || signUpForm.get('confirmPassword')?.dirty)" [class.is-valid]="!signUpForm.get('confirmPassword')?.invalid && (signUpForm.get('confirmPassword')?.touched || signUpForm.get('confirmPassword')?.dirty)"
+                                    <input (keyup)="confirmPassword()" type="password" class="form-control form-control-lg shadow-none"
+                                        [class.is-invalid]="signUpForm.get('confirmPassword')?.errors && !sameAs && (signUpForm.get('confirmPassword')?.touched || signUpForm.get('confirmPassword')?.dirty)" [class.is-valid]="!signUpForm.get('confirmPassword')?.errors && sameAs && (signUpForm.get('confirmPassword')?.touched || signUpForm.get('confirmPassword')?.dirty)"
                                         formControlName="confirmPassword" placeholder="Confirm your password" />
+                                    @if (!sameAs && (signUpForm.get('confirmPassword')?.touched || signUpForm.get('confirmPassword')?.dirty)) {
+                                        <small class="text-danger">Passwords do not match</small>
+                                    } @else if (signUpForm.get('confirmPassword')?.hasError('required') && signUpForm.get('confirmPassword')?.dirty) {
+                                        <small class="text-danger">Confirm password cannot be empty</small>
+                                    }
                                 </div>
                             </div>
                             <div class="col-12">
                                 <button class="btn btn-success btn-lg w-100 fw-semibold mt-3" (click)="register()"
-                                    [disabled]="!signUpForm.valid">
+                                    [disabled]="!signUpForm.valid || !sameAs">
                                     Create Account
                                 </button>
                             </div>
