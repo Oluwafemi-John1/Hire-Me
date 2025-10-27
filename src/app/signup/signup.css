@@ -1,3 +1,8 @@
+/* Customer Theme - Font Family */
+* {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+}
+
 /* Customer Theme Colors */
 .customer-bg {
     background-image: url('/assets/customer-bg.svg');
