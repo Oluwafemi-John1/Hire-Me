@@ -18,8 +18,8 @@
 
                     <!-- Title Section -->
                     <div class="text-center mb-4" data-aos="fade-up" data-aos-delay="100">
-                        <h2 class="fw-bold">Create Your Customer Account</h2>
-                        <p class="text-secondary">Find and hire skilled professionals for your projects</p>
+                        <h2 class="fw-bold">Join as an Artisan</h2>
+                        <p class="text-secondary">Showcase your skills and connect with clients</p>
                     </div>
 
                     <!-- Form Section -->
@@ -85,7 +85,7 @@
                                     <small class="text-danger">Must be a valid password</small>
                                     } @else if (signUpForm.get('password')?.hasError('required') &&
                                     signUpForm.get('password')?.touched) {
-                                    <small class="text-danger">Email cannot be empty</small>
+                                    <small class="text-danger">Password cannot be empty</small>
                                     }
                                     <div class="form-text small">Must be at least 8 characters with numbers and special
                                         characters</div>
@@ -111,7 +111,7 @@
                             <div class="col-12">
                                 <button class="btn btn-success btn-lg w-100 fw-semibold mt-3" (click)="register()"
                                     [disabled]="!signUpForm.valid || !sameAs">
-                                    Create Account
+                                    Create Artisan Account
                                 </button>
                             </div>
                         </div>
@@ -119,8 +119,9 @@
 
                     <!-- Footer Section -->
                     <div class="text-center mt-4" data-aos="fade-up" data-aos-delay="300">
-                        <p class="mb-0 text-secondary">Already have an account?
-                            <a routerLink="/signin" class="text-success fw-semibold text-decoration-none">Sign in</a>
+                        <p class="mb-0 text-secondary">Already registered as an artisan?
+                            <a routerLink="/artisansignin" class="text-success fw-semibold text-decoration-none">Sign
+                                in</a>
                         </p>
                     </div>
                 </div>

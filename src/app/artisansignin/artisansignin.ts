@@ -1,0 +1,31 @@
+import { Component, OnInit, inject } from '@angular/core';
+import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RouterLink } from '@angular/router';
+import * as AOS from 'aos';
+
+@Component({
+    selector: 'app-artisansignin',
+    imports: [ReactiveFormsModule, FormsModule, RouterLink],
+    templateUrl: './artisansignin.html',
+    styleUrl: './artisansignin.css'
+})
+export class Artisansignin implements OnInit {
+    private builder = inject(FormBuilder)
+
+    ngOnInit() {
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+    }
+
+    signInForm = this.builder.group({
+        email: ["", [Validators.required, Validators.email]],
+        passWord: ["", [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]]
+    })
+
+    logIn() {
+        console.log(this.signInForm);
+    }
+}
