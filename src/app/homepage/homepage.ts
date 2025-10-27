@@ -29,4 +29,12 @@ export class Homepage implements OnInit {
     signIn() {
         this.router.navigate(['/signin'])
     }
+
+    hireArtisan() {
+        this.router.navigate(['/signup'])
+    }
+
+    joinAsArtisan() {
+        this.router.navigate(['/signup'])
+    }
 }
