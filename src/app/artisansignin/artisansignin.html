@@ -1,13 +1,13 @@
-<div class="min-vh-100 d-flex align-items-center py-5" style="background-color: #f8faf9;">
+<div class="min-vh-100 d-flex align-items-center py-5 artisan-bg">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-5 col-md-7 col-11">
-                <div class="bg-white rounded-4 p-4 p-lg-5" data-aos="fade-up">
+                <div class="bg-white rounded-4 p-4 p-lg-5 shadow" data-aos="fade-up">
                     <!-- Logo Section -->
                     <div class="text-center mb-4">
                         <a routerLink="/" class="d-inline-block text-decoration-none text-dark">
-                            <div class="d-flex align-items-center gap-2">
-                                <div class="logo-box bg-success rounded d-flex align-items-center justify-content-center"
+                            <div class="d-flex align-items-center gap-2 justify-content-center">
+                                <div class="logo-box artisan-theme rounded d-flex align-items-center justify-content-center"
                                     style="width: 40px; height: 40px;">
                                     <i class="bi bi-briefcase-fill text-white"></i>
                                 </div>
@@ -55,7 +55,7 @@
                                 </div>
                             </div>
                             <div class="col-12">
-                                <button class="btn btn-success btn-lg w-100 fw-semibold mt-3" (click)="logIn()"
+                                <button class="btn artisan-btn btn-lg w-100 fw-semibold mt-3" (click)="logIn()"
                                     [disabled]="!signInForm.valid">
                                     Sign In
                                 </button>
@@ -65,10 +65,16 @@
 
                     <!-- Footer Section -->
                     <div class="text-center mt-4" data-aos="fade-up" data-aos-delay="300">
-                        <p class="mb-0 text-secondary">Don't have an artisan account?
-                            <a routerLink="/artisansignup" class="text-success fw-semibold text-decoration-none">Create
+                        <p class="mb-2 text-secondary">Don't have an artisan account?
+                            <a routerLink="/artisansignup" class="artisan-link fw-semibold text-decoration-none">Create
                                 Account</a>
                         </p>
+                        <div class="pt-3 border-top">
+                            <p class="mb-0 text-secondary small">Looking to hire professionals?
+                                <a routerLink="/signin" class="text-success fw-semibold text-decoration-none">Sign in as
+                                    Customer</a>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>

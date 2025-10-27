@@ -1,19 +1,71 @@
+/* Customer Theme Colors */
+.customer-bg {
+    background-image: url('/assets/customer-bg.svg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.customer-theme {
+    background-color: #16a34a !important;
+}
+
+.customer-btn {
+    background-color: #16a34a;
+    border-color: #16a34a;
+    color: white;
+}
+
+.customer-btn:hover:not(:disabled) {
+    background-color: #15803d;
+    border-color: #15803d;
+    transform: translateY(-1px);
+}
+
+.customer-btn:disabled {
+    background-color: #16a34a;
+    border-color: #16a34a;
+    opacity: 0.65;
+}
+
+.customer-link {
+    color: #16a34a;
+}
+
+.customer-link:hover {
+    color: #15803d;
+}
+
 .logo-box {
     width: 40px;
     height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+a:hover .logo-box {
+    transform: scale(1.1);
 }
 
 .form-control:focus {
-    border-color: #198754;
-    box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
+    border-color: #16a34a;
+    box-shadow: 0 0 0 0.25rem rgba(22, 163, 74, 0.25);
 }
 
 .form-control.is-invalid:focus {
     border-color: #dc3545;
     box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
+}
+
+.form-control.is-valid {
+    border-color: #16a34a;
+}
+
+.form-control.is-valid:focus {
+    border-color: #16a34a;
+    box-shadow: 0 0 0 0.25rem rgba(22, 163, 74, 0.25);
 }
 
 /* Responsive adjustments */

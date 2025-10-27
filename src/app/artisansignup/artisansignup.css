@@ -1,3 +1,41 @@
+/* Artisan Theme Colors */
+.artisan-bg {
+    background-image: url('/assets/artisan-bg.svg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.artisan-theme {
+    background-color: #2563eb !important;
+}
+
+.artisan-btn {
+    background-color: #2563eb;
+    border-color: #2563eb;
+    color: white;
+}
+
+.artisan-btn:hover:not(:disabled) {
+    background-color: #1d4ed8;
+    border-color: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+.artisan-btn:disabled {
+    background-color: #2563eb;
+    border-color: #2563eb;
+    opacity: 0.65;
+}
+
+.artisan-link {
+    color: #2563eb;
+}
+
+.artisan-link:hover {
+    color: #1d4ed8;
+}
+
 .form-control {
     border: 1px solid #e5e7eb;
     padding: 0.75rem 1rem;
@@ -5,8 +43,8 @@
 }
 
 .form-control:focus {
-    border-color: #10b981;
-    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
 .form-control.is-invalid {
@@ -18,22 +56,13 @@
     box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
 }
 
-.btn-success {
-    background-color: #10b981;
-    border-color: #10b981;
-    transition: all 0.2s ease;
+.form-control.is-valid {
+    border-color: #2563eb;
 }
 
-.btn-success:hover:not(:disabled) {
-    background-color: #059669;
-    border-color: #059669;
-    transform: translateY(-1px);
-}
-
-.btn-success:disabled {
-    background-color: #10b981;
-    border-color: #10b981;
-    opacity: 0.65;
+.form-control.is-valid:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
 
 /* Logo animation */
@@ -73,10 +102,10 @@ a:hover .logo-box {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #10b981;
+    background: #2563eb;
     border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #059669;
+    background: #1d4ed8;
 }

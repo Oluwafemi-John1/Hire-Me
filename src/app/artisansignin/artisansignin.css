@@ -1,19 +1,71 @@
+/* Artisan Theme Colors */
+.artisan-bg {
+    background-image: url('/assets/artisan-bg.svg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.artisan-theme {
+    background-color: #2563eb !important;
+}
+
+.artisan-btn {
+    background-color: #2563eb;
+    border-color: #2563eb;
+    color: white;
+}
+
+.artisan-btn:hover:not(:disabled) {
+    background-color: #1d4ed8;
+    border-color: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+.artisan-btn:disabled {
+    background-color: #2563eb;
+    border-color: #2563eb;
+    opacity: 0.65;
+}
+
+.artisan-link {
+    color: #2563eb;
+}
+
+.artisan-link:hover {
+    color: #1d4ed8;
+}
+
 .logo-box {
     width: 40px;
     height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+a:hover .logo-box {
+    transform: scale(1.1);
 }
 
 .form-control:focus {
-    border-color: #198754;
-    box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
+    border-color: #2563eb;
+    box-shadow: 0 0 0 0.25rem rgba(37, 99, 235, 0.25);
 }
 
 .form-control.is-invalid:focus {
     border-color: #dc3545;
     box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
+}
+
+.form-control.is-valid {
+    border-color: #2563eb;
+}
+
+.form-control.is-valid:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 0.25rem rgba(37, 99, 235, 0.25);
 }
 
 /* Responsive adjustments */
