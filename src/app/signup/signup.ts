@@ -44,7 +44,7 @@ export class Signup implements OnInit {
         this.users.push(this.signUpForm.value)
         // this.users.find(user=>{user.email === this.signUpForm.value.email})
         // localStorage['users'] = JSON.stringify(this.users);
-        this.http.post('', this.signUpForm.value)
+        this.http.post('http://localhost:8888/HireMe/Auth.php', this.signUpForm.value).subscribe(response => {console.log(response)})
     }
 
     confirmPassword() {
