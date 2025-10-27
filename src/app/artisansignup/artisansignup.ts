@@ -39,7 +39,7 @@ export class Artisansignup implements OnInit {
     register() {
         this.users.push(this.signUpForm.value)
         // localStorage['artisans'] = JSON.stringify(this.users);
-        this.http.post('http://localhost:8888/HireMe/Auth.php', this.signUpForm.value).subscribe(response => { console.log(response) })
+        this.http.post('http://localhost:8888/HireMe/ArtisanAuth.php', this.signUpForm.value).subscribe(response => { console.log(response) })
     }
 
     confirmPassword() {
