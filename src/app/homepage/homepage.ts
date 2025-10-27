@@ -35,6 +35,6 @@ export class Homepage implements OnInit {
     }
 
     joinAsArtisan() {
-        this.router.navigate(['/signup'])
+        this.router.navigate(['/artisansignup'])
     }
 }
