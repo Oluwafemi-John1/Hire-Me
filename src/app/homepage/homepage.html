@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-white">
+<nav class="navbar navbar-expand-lg bg-white" [class.navbar-scrolled]="isScrolled">
     <div class="container-fluid px-3 px-lg-5">
         <a class="navbar-brand" routerLink="/">
             <div class="d-flex align-items-center gap-2">
@@ -33,7 +33,7 @@
         </div>
     </div>
 </nav>
-<section class="px-lg-5">
+<section class="px-lg-5 mt-5 pt-4">
     <section class="px-lg-5">
         <main class="container-fluid px-3 px-lg-5">
             <section class="row align-items-center mt-5">
@@ -48,7 +48,7 @@
                     </p>
                     <div class="d-flex gap-3" data-aos="fade-up" data-aos-delay="200">
                         <button (click)="hireArtisan()" class="btn btn-success px-4">Hire Artisan Now</button>
-                        <button (click)="joinAsArtisan()" class="btn btn-outline-success">Join as Artisan</button>
+                        <button (click)="joinAsArtisan()" class="btn btn-outline-success">Join as an Artisan</button>
                     </div>
                     <div class="stats d-flex gap-5 mt-5" data-aos="fade-up" data-aos-delay="400">
                         <div>
@@ -261,8 +261,8 @@
                     <p class="mb-4" data-aos="fade-up" data-aos-delay="200">Join thousands of businesses and
                         professionals already using HireMe</p>
                     <div class="d-flex justify-content-center gap-3" data-aos="fade-up" data-aos-delay="300">
-                        <button class="btn btn-light btn-sm px-4">Post a Job</button>
-                        <button class="btn btn-outline-light btn-sm px-4">Browse Talent</button>
+                        <button (click)="joinAsArtisan()" class="btn btn-light btn-sm px-4">Post a Job</button>
+                        <button (click)="hireArtisan()" class="btn btn-outline-light btn-sm px-4">Browse Talent</button>
                     </div>
                 </div>
             </section>

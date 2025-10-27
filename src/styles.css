@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Global Font Family - Inter */
+* {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+}
+
+/* Override for body to ensure consistency */
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, HostListener, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import * as AOS from 'aos';
 
@@ -12,6 +12,7 @@ import * as AOS from 'aos';
 export class Homepage implements OnInit {
     private router = inject(Router);
     year = new Date().getFullYear()
+    isScrolled = false;
 
     ngOnInit() {
         AOS.init({
@@ -20,6 +21,12 @@ export class Homepage implements OnInit {
             offset: 100,
             easing: 'ease-in-out'
         });
+    }
+
+    @HostListener('window:scroll', [])
+    onWindowScroll() {
+        const scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+        this.isScrolled = scrollPosition > 50;
     }
 
     signUp() {
