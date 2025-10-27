@@ -29,11 +29,11 @@
                                 <div class="form-group">
                                     <label class="form-label small fw-semibold text-secondary">First Name</label>
                                     <input type="text" class="form-control form-control-lg shadow-none"
-                                        [class.is-invalid]="signUpForm.get('firstName')?.invalid && (signUpForm.get('firstName')?.touched || signUpForm.get('firstName')?.dirty)" [class.is-valid]="!signUpForm.get('firstName')?.invalid && (signUpForm.get('firstName')?.touched || signUpForm.get('firstName')?.dirty)"
-                                        formControlName="firstName" placeholder="Enter your first name" />
-                                    @if (signUpForm.get('firstName')?.hasError('minlength') && (signUpForm.get('firstName')?.touched || signUpForm.get('firstName')?.dirty)) {
+                                        [class.is-invalid]="signUpForm.get('first_name')?.invalid && (signUpForm.get('first_name')?.touched || signUpForm.get('first_name')?.dirty)" [class.is-valid]="!signUpForm.get('first_name')?.invalid && (signUpForm.get('first_name')?.touched || signUpForm.get('first_name')?.dirty)"
+                                        formControlName="first_name" placeholder="Enter your first name" />
+                                    @if (signUpForm.get('first_name')?.hasError('minlength') && (signUpForm.get('first_name')?.touched || signUpForm.get('first_name')?.dirty)) {
                                         <small class="text-danger">First Name cannot be less than 2 characters</small>
-                                    } @else if (signUpForm.get('firstName')?.hasError('required') && signUpForm.get('firstName')?.touched) {
+                                    } @else if (signUpForm.get('first_name')?.hasError('required') && signUpForm.get('first_name')?.touched) {
                                         <small class="text-danger">First Name cannot be empty</small>
                                     }
                                 </div>
@@ -42,11 +42,11 @@
                                 <div class="form-group">
                                     <label class="form-label small fw-semibold text-secondary">Last Name</label>
                                     <input type="text" class="form-control form-control-lg shadow-none"
-                                        [class.is-invalid]="signUpForm.get('lastName')?.invalid && (signUpForm.get('lastName')?.touched || signUpForm.get('lastName')?.dirty)" [class.is-valid]="!signUpForm.get('lastName')?.invalid && (signUpForm.get('lastName')?.touched || signUpForm.get('lastName')?.dirty)"
-                                        formControlName="lastName" placeholder="Enter your last name" />
-                                    @if (signUpForm.get('lastName')?.hasError('minlength') && (signUpForm.get('lastName')?.touched || signUpForm.get('lastName')?.dirty)) {
+                                        [class.is-invalid]="signUpForm.get('last_name')?.invalid && (signUpForm.get('last_name')?.touched || signUpForm.get('last_name')?.dirty)" [class.is-valid]="!signUpForm.get('last_name')?.invalid && (signUpForm.get('last_name')?.touched || signUpForm.get('last_name')?.dirty)"
+                                        formControlName="last_name" placeholder="Enter your last name" />
+                                    @if (signUpForm.get('last_name')?.hasError('minlength') && (signUpForm.get('last_name')?.touched || signUpForm.get('last_name')?.dirty)) {
                                         <small class="text-danger">Last Name cannot be less than 2 characters</small>
-                                    } @else if (signUpForm.get('lastName')?.hasError('required') && signUpForm.get('lastName')?.touched) {
+                                    } @else if (signUpForm.get('last_name')?.hasError('required') && signUpForm.get('last_name')?.touched) {
                                         <small class="text-danger">Last Name cannot be empty</small>
                                     }
                                 </div>
@@ -68,11 +68,11 @@
                                 <div class="form-group">
                                     <label class="form-label small fw-semibold text-secondary">Password</label>
                                     <input type="password" class="form-control form-control-lg shadow-none"
-                                        [class.is-invalid]="signUpForm.get('passWord')?.invalid && (signUpForm.get('passWord')?.touched || signUpForm.get('passWord')?.dirty)" [class.is-valid]="!signUpForm.get('email')?.invalid && (signUpForm.get('email')?.touched || signUpForm.get('email')?.dirty)"
-                                        formControlName="passWord" placeholder="Create a password" />
-                                    @if (signUpForm.get('passWord')?.hasError('pattern') && (signUpForm.get('passWord')?.touched || signUpForm.get('passWord')?.dirty)) {
+                                        [class.is-invalid]="signUpForm.get('password')?.invalid && (signUpForm.get('password')?.touched || signUpForm.get('password')?.dirty)" [class.is-valid]="!signUpForm.get('email')?.invalid && (signUpForm.get('email')?.touched || signUpForm.get('email')?.dirty)"
+                                        formControlName="password" placeholder="Create a password" />
+                                    @if (signUpForm.get('password')?.hasError('pattern') && (signUpForm.get('password')?.touched || signUpForm.get('password')?.dirty)) {
                                         <small class="text-danger">Must be a valid password</small>
-                                    } @else if (signUpForm.get('passWord')?.hasError('required') && signUpForm.get('passWord')?.touched) {
+                                    } @else if (signUpForm.get('password')?.hasError('required') && signUpForm.get('password')?.touched) {
                                         <small class="text-danger">Email cannot be empty</small>
                                     }
                                     <div class="form-text small">Must be at least 8 characters with numbers and special

@@ -30,10 +30,10 @@ export class Signup implements OnInit {
     }
 
     signUpForm = this.builder.group({
-        firstName: ["", [Validators.required, Validators.minLength(2)]],
-        lastName: ["", [Validators.required, Validators.minLength(2)]],
+        first_name: ["", [Validators.required, Validators.minLength(2)]],
+        last_name: ["", [Validators.required, Validators.minLength(2)]],
         email: ["", [Validators.required, Validators.email]],
-        passWord: ["", [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]],
+        password: ["", [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]],
         confirmPassword: ["", [Validators.required]]
     })
 
@@ -50,7 +50,7 @@ export class Signup implements OnInit {
     confirmPassword() {
         console.log(this.signUpForm.value.confirmPassword);
         
-        if (this.signUpForm.value.confirmPassword === this.signUpForm.value.passWord) {
+        if (this.signUpForm.value.confirmPassword === this.signUpForm.value.password) {
             this.sameAs = true
         }
     }
