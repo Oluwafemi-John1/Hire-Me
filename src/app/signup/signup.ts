@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
@@ -14,6 +15,7 @@ import * as AOS from 'aos';
 
 export class Signup implements OnInit {
     private builder = inject(FormBuilder);
+    private http = inject(HttpClient)
     users: any = [];
     sameAs: boolean = false
 
@@ -41,12 +43,8 @@ export class Signup implements OnInit {
         // console.log(this.signUpForm.valid);
         this.users.push(this.signUpForm.value)
         // this.users.find(user=>{user.email === this.signUpForm.value.email})
-        localStorage['users'] = JSON.stringify(this.users);
-        this.signUpForm.value.firstName = ''
-        this.signUpForm.value.lastName = ''
-        this.signUpForm.value.email = ''
-        this.signUpForm.value.passWord = ''
-        this.signUpForm.value.confirmPassword = ''
+        // localStorage['users'] = JSON.stringify(this.users);
+        this.http.post('', this.signUpForm.value)
     }
 
     confirmPassword() {
