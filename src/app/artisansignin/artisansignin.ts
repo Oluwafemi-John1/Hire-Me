@@ -22,7 +22,7 @@ export class Artisansignin implements OnInit {
 
     signInForm = this.builder.group({
         email: ["", [Validators.required, Validators.email]],
-        passWord: ["", [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]]
+        password: ["", [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]]
     })
 
     logIn() {

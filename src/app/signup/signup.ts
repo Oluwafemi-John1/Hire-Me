@@ -39,7 +39,7 @@ export class Signup implements OnInit {
 
 
     register() {
-        // console.log(this.firstName, this.lastName, this.email, this.passWord, this.confirmPassword);
+        // console.log(this.firstName, this.lastName, this.email, this.password, this.confirmPassword);
         // console.log(this.signUpForm.valid);
         this.users.push(this.signUpForm.value)
         // this.users.find(user=>{user.email === this.signUpForm.value.email})

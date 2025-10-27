@@ -45,11 +45,11 @@
                                 <div class="form-group">
                                     <label class="form-label small fw-semibold text-secondary">Password</label>
                                     <input type="password" class="form-control form-control-lg shadow-none"
-                                        [class.is-invalid]="signInForm.get('passWord')?.invalid && signInForm.get('passWord')?.touched"
-                                        [class.is-valid]="!signInForm.get('passWord')?.invalid && signInForm.get('passWord')?.touched"
-                                        formControlName="passWord" placeholder="Enter your password" />
-                                    @if (signInForm.get('passWord')?.hasError('required') &&
-                                    signInForm.get('passWord')?.touched) {
+                                        [class.is-invalid]="signInForm.get('password')?.invalid && signInForm.get('password')?.touched"
+                                        [class.is-valid]="!signInForm.get('password')?.invalid && signInForm.get('password')?.touched"
+                                        formControlName="password" placeholder="Enter your password" />
+                                    @if (signInForm.get('password')?.hasError('required') &&
+                                    signInForm.get('password')?.touched) {
                                     <small class="text-danger">Password cannot be empty</small>
                                     }
                                 </div>
