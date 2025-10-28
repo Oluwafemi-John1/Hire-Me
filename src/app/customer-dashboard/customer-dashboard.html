@@ -1,1 +1,198 @@
-<p>customer-dashboard works!</p>
+<div class="dashboard-wrapper">
+    <!-- Sidebar -->
+    <aside class="sidebar" data-aos="fade-right">
+        <div class="sidebar-header">
+            <div class="d-flex align-items-center gap-2">
+                <div class="logo-box bg-success rounded">
+                    <i class="bi bi-briefcase-fill text-white"></i>
+                </div>
+                <span class="fw-bold fs-5">HireMe</span>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav mt-4">
+            <a href="#" class="nav-item active">
+                <i class="bi bi-speedometer2"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="bi bi-people"></i>
+                <span>My Artisans</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="bi bi-folder"></i>
+                <span>Projects</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="bi bi-wallet2"></i>
+                <span>Payments</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="bi bi-chat-dots"></i>
+                <span>Messages</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="bi bi-gear"></i>
+                <span>Settings</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <a routerLink="/" class="nav-item text-danger">
+                <i class="bi bi-box-arrow-left"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Bar -->
+        <header class="top-bar" data-aos="fade-down">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h4 class="mb-0 fw-bold">Welcome back, {{customerName}}!</h4>
+                    <p class="text-secondary small mb-0">Here's what's happening with your projects</p>
+                </div>
+                <div class="d-flex gap-3 align-items-center">
+                    <button class="btn btn-success">
+                        <i class="bi bi-plus-lg me-2"></i>Hire Artisan
+                    </button>
+                    <div class="notification-icon">
+                        <i class="bi bi-bell-fill"></i>
+                        <span class="badge">3</span>
+                    </div>
+                    <div class="user-avatar">
+                        <img src="https://ui-avatars.com/api/?name={{customerName}}&background=16a34a&color=fff&size=40&bold=true"
+                            alt="{{customerName}}">
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Stats Cards -->
+        <div class="row g-4 mt-3">
+            <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="0">
+                <div class="stat-card">
+                    <div class="stat-icon bg-success bg-opacity-10">
+                        <i class="bi bi-people-fill text-success"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 class="mb-0">{{stats.totalHired}}</h3>
+                        <p class="text-secondary mb-0">Total Hired</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="stat-card">
+                    <div class="stat-icon bg-primary bg-opacity-10">
+                        <i class="bi bi-briefcase-fill text-primary"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 class="mb-0">{{stats.activeProjects}}</h3>
+                        <p class="text-secondary mb-0">Active Projects</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                <div class="stat-card">
+                    <div class="stat-icon bg-info bg-opacity-10">
+                        <i class="bi bi-check-circle-fill text-info"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 class="mb-0">{{stats.completedProjects}}</h3>
+                        <p class="text-secondary mb-0">Completed</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                <div class="stat-card">
+                    <div class="stat-icon bg-warning bg-opacity-10">
+                        <i class="bi bi-currency-exchange text-warning"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 class="mb-0">₦{{stats.totalSpent | number}}</h3>
+                        <p class="text-secondary mb-0">Total Spent</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="row g-4 mt-3">
+            <div class="col-lg-8" data-aos="fade-up">
+                <div class="chart-card">
+                    <div class="card-header">
+                        <h5 class="mb-0 fw-bold">Spending Overview</h5>
+                        <p class="text-secondary small mb-0">Monthly spending trends</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="spendingChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="chart-card">
+                    <div class="card-header">
+                        <h5 class="mb-0 fw-bold">Services</h5>
+                        <p class="text-secondary small mb-0">By category</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="categoryChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Artisans -->
+        <div class="mt-4" data-aos="fade-up">
+            <div class="table-card">
+                <div class="card-header">
+                    <h5 class="mb-0 fw-bold">Recent Artisans</h5>
+                    <a href="#" class="text-success text-decoration-none">View All <i class="bi bi-arrow-right"></i></a>
+                </div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Artisan</th>
+                                <th>Skill</th>
+                                <th>Rating</th>
+                                <th>Status</th>
+                                <th>Amount</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let artisan of recentArtisans" class="table-row-hover">
+                                <td>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <img [src]="artisan.avatar" [alt]="artisan.name" class="rounded-circle"
+                                            width="40" height="40">
+                                        <span class="fw-semibold">{{artisan.name}}</span>
+                                    </div>
+                                </td>
+                                <td>{{artisan.skill}}</td>
+                                <td>
+                                    <div class="d-flex align-items-center gap-1">
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <span>{{artisan.rating}}</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="status-badge" [ngClass]="getStatusClass(artisan.status)">
+                                        {{artisan.status}}
+                                    </span>
+                                </td>
+                                <td class="fw-semibold">₦{{artisan.amount | number}}</td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-success">View</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>

@@ -1,1 +1,223 @@
-<p>admin-dashboard works!</p>
+<div class="dashboard-wrapper">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="d-flex align-items-center gap-2">
+                <div class="logo-box bg-purple text-white rounded">
+                    <i class="bi bi-shield-check"></i>
+                </div>
+                <h5 class="mb-0 fw-bold">Admin Panel</h5>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a routerLink="/admin-dashboard" class="nav-item active">
+                <i class="bi bi-speedometer2"></i>
+                <span>Dashboard</span>
+            </a>
+            <a routerLink="/admin-users" class="nav-item">
+                <i class="bi bi-people"></i>
+                <span>Users</span>
+            </a>
+            <a routerLink="/admin-artisans" class="nav-item">
+                <i class="bi bi-tools"></i>
+                <span>Artisans</span>
+            </a>
+            <a routerLink="/admin-customers" class="nav-item">
+                <i class="bi bi-person-badge"></i>
+                <span>Customers</span>
+            </a>
+            <a routerLink="/admin-transactions" class="nav-item">
+                <i class="bi bi-cash-stack"></i>
+                <span>Transactions</span>
+            </a>
+            <a routerLink="/admin-reports" class="nav-item">
+                <i class="bi bi-bar-chart"></i>
+                <span>Reports</span>
+            </a>
+            <a routerLink="/admin-settings" class="nav-item">
+                <i class="bi bi-gear"></i>
+                <span>Settings</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <a routerLink="/homepage" class="nav-item text-danger">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Bar -->
+        <div class="top-bar" data-aos="fade-down">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h4 class="mb-1 fw-bold">Platform Overview 📊</h4>
+                    <p class="text-muted mb-0">Monitor and manage your platform performance</p>
+                </div>
+                <div class="d-flex align-items-center gap-3">
+                    <button class="btn btn-purple">
+                        <i class="bi bi-plus-circle me-2"></i>Export Report
+                    </button>
+                    <div class="notification-icon">
+                        <i class="bi bi-bell-fill"></i>
+                        <span class="badge">8</span>
+                    </div>
+                    <div class="user-avatar">
+                        <img src="https://ui-avatars.com/api/?name=Admin+User&background=8b5cf6&color=fff&size=40"
+                            alt="Admin Avatar">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="row mt-4">
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="stat-card">
+                    <div class="stat-icon bg-purple bg-opacity-10 text-purple">
+                        <i class="bi bi-people-fill"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 class="mb-0">{{stats.totalUsers}}</h3>
+                        <p class="text-muted mb-0">Total Users</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="stat-card">
+                    <div class="stat-icon bg-primary bg-opacity-10 text-primary">
+                        <i class="bi bi-tools"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 class="mb-0">{{stats.totalArtisans}}</h3>
+                        <p class="text-muted mb-0">Artisans</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="stat-card">
+                    <div class="stat-icon bg-success bg-opacity-10 text-success">
+                        <i class="bi bi-person-check-fill"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 class="mb-0">{{stats.totalCustomers}}</h3>
+                        <p class="text-muted mb-0">Customers</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="400">
+                <div class="stat-card">
+                    <div class="stat-icon bg-info bg-opacity-10 text-info">
+                        <i class="bi bi-currency-exchange"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 class="mb-0">₦{{stats.totalRevenue.toLocaleString()}}</h3>
+                        <p class="text-muted mb-0">Total Revenue</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="row mt-4">
+            <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="500">
+                <div class="chart-card">
+                    <div class="card-header">
+                        <h5 class="mb-0 fw-bold">Revenue Overview</h5>
+                        <p class="text-muted mb-0 small">Last 6 months platform revenue</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="600">
+                <div class="chart-card">
+                    <div class="card-header">
+                        <h5 class="mb-0 fw-bold">User Growth</h5>
+                        <p class="text-muted mb-0 small">Customer and artisan growth trend</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="userGrowthChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- User Distribution & Recent Users -->
+        <div class="row mt-4">
+            <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="700">
+                <div class="chart-card">
+                    <div class="card-header">
+                        <h5 class="mb-0 fw-bold">User Distribution</h5>
+                        <p class="text-muted mb-0 small">Platform user breakdown</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="userDistChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-8 mb-4" data-aos="fade-up" data-aos-delay="800">
+                <div class="table-card">
+                    <div class="card-header">
+                        <h5 class="mb-0 fw-bold">Recent Users</h5>
+                        <a routerLink="/admin-users" class="btn btn-sm btn-outline-purple">View All</a>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Email</th>
+                                    <th>Status</th>
+                                    <th>Joined</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let user of recentUsers" class="table-row-hover">
+                                    <td class="fw-semibold">{{user.id}}</td>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <img [src]="'https://ui-avatars.com/api/?name=' + user.name + '&background=8b5cf6&color=fff&size=32'"
+                                                alt="User Avatar" class="rounded-circle" width="32" height="32">
+                                            {{user.name}}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="badge" [ngClass]="getUserTypeClass(user.type)">
+                                            {{user.type}}
+                                        </span>
+                                    </td>
+                                    <td>{{user.email}}</td>
+                                    <td>
+                                        <span class="status-badge" [ngClass]="getStatusClass(user.status)">
+                                            {{user.status}}
+                                        </span>
+                                    </td>
+                                    <td>{{user.joinedDate}}</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-purple">
+                                            <i class="bi bi-three-dots-vertical"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>

@@ -1,1 +1,203 @@
-<p>artisan-dashboard works!</p>
+<div class="dashboard-wrapper">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="d-flex align-items-center gap-2">
+                <div class="logo-box bg-primary text-white rounded">
+                    <i class="bi bi-tools"></i>
+                </div>
+                <h5 class="mb-0 fw-bold">Artisan Portal</h5>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a routerLink="/artisan-dashboard" class="nav-item active">
+                <i class="bi bi-speedometer2"></i>
+                <span>Dashboard</span>
+            </a>
+            <a routerLink="/artisan-jobs" class="nav-item">
+                <i class="bi bi-briefcase"></i>
+                <span>My Jobs</span>
+            </a>
+            <a routerLink="/artisan-earnings" class="nav-item">
+                <i class="bi bi-cash-stack"></i>
+                <span>Earnings</span>
+            </a>
+            <a routerLink="/artisan-profile" class="nav-item">
+                <i class="bi bi-person-badge"></i>
+                <span>Profile</span>
+            </a>
+            <a routerLink="/artisan-portfolio" class="nav-item">
+                <i class="bi bi-folder"></i>
+                <span>Portfolio</span>
+            </a>
+            <a routerLink="/artisan-messages" class="nav-item">
+                <i class="bi bi-chat-dots"></i>
+                <span>Messages</span>
+            </a>
+            <a routerLink="/artisan-settings" class="nav-item">
+                <i class="bi bi-gear"></i>
+                <span>Settings</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <a routerLink="/artisansignin" class="nav-item text-danger">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Bar -->
+        <div class="top-bar" data-aos="fade-down">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h4 class="mb-1 fw-bold">Welcome back, Chukwudi! 👋</h4>
+                    <p class="text-muted mb-0">Here's what's happening with your business today</p>
+                </div>
+                <div class="d-flex align-items-center gap-3">
+                    <button class="btn btn-primary">
+                        <i class="bi bi-plus-circle me-2"></i>Update Availability
+                    </button>
+                    <div class="notification-icon">
+                        <i class="bi bi-bell-fill"></i>
+                        <span class="badge">4</span>
+                    </div>
+                    <div class="user-avatar">
+                        <img src="https://ui-avatars.com/api/?name=Chukwudi+Okafor&background=2563eb&color=fff&size=40"
+                            alt="User Avatar">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="row mt-4">
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="stat-card">
+                    <div class="stat-icon bg-primary bg-opacity-10 text-primary">
+                        <i class="bi bi-briefcase-fill"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 class="mb-0">{{stats.totalJobs}}</h3>
+                        <p class="text-muted mb-0">Total Jobs</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="stat-card">
+                    <div class="stat-icon bg-warning bg-opacity-10 text-warning">
+                        <i class="bi bi-hourglass-split"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 class="mb-0">{{stats.activeJobs}}</h3>
+                        <p class="text-muted mb-0">Active Jobs</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="stat-card">
+                    <div class="stat-icon bg-success bg-opacity-10 text-success">
+                        <i class="bi bi-check-circle-fill"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 class="mb-0">{{stats.completedJobs}}</h3>
+                        <p class="text-muted mb-0">Completed</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="400">
+                <div class="stat-card">
+                    <div class="stat-icon bg-info bg-opacity-10 text-info">
+                        <i class="bi bi-currency-exchange"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 class="mb-0">₦{{stats.totalEarnings.toLocaleString()}}</h3>
+                        <p class="text-muted mb-0">Total Earnings</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="row mt-4">
+            <div class="col-lg-8 mb-4" data-aos="fade-up" data-aos-delay="500">
+                <div class="chart-card">
+                    <div class="card-header">
+                        <h5 class="mb-0 fw-bold">Earnings Overview</h5>
+                        <p class="text-muted mb-0 small">Last 6 months earnings trend</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="earningsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="600">
+                <div class="chart-card">
+                    <div class="card-header">
+                        <h5 class="mb-0 fw-bold">Job Status</h5>
+                        <p class="text-muted mb-0 small">Current job distribution</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="jobStatusChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Jobs Table -->
+        <div class="table-card mt-4" data-aos="fade-up" data-aos-delay="700">
+            <div class="card-header">
+                <h5 class="mb-0 fw-bold">Recent Jobs</h5>
+                <a routerLink="/artisan-jobs" class="btn btn-sm btn-outline-primary">View All</a>
+            </div>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Job ID</th>
+                            <th>Customer</th>
+                            <th>Service</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let job of recentJobs" class="table-row-hover">
+                            <td class="fw-semibold">{{job.id}}</td>
+                            <td>
+                                <div class="d-flex align-items-center gap-2">
+                                    <img [src]="'https://ui-avatars.com/api/?name=' + job.customer + '&background=2563eb&color=fff&size=32'"
+                                        alt="Customer Avatar" class="rounded-circle" width="32" height="32">
+                                    {{job.customer}}
+                                </div>
+                            </td>
+                            <td>{{job.service}}</td>
+                            <td class="fw-semibold">₦{{job.amount.toLocaleString()}}</td>
+                            <td>
+                                <span class="status-badge" [ngClass]="getStatusClass(job.status)">
+                                    {{job.status}}
+                                </span>
+                            </td>
+                            <td>{{job.date}}</td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-primary">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</div>
