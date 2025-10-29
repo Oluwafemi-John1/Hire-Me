@@ -53,5 +53,6 @@ export class Artisansignin implements OnInit {
                     console.error('Error:', error);
                 }
             })
+            
     }
 }
