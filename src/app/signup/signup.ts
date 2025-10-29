@@ -18,6 +18,7 @@ export class Signup implements OnInit {
     private http = inject(HttpClient)
     users: any = [];
     sameAs: boolean = false
+    message: any = ''
 
     ngOnInit() {
         AOS.init({
@@ -44,7 +45,15 @@ export class Signup implements OnInit {
         this.users.push(this.signUpForm.value)
         // this.users.find(user=>{user.email === this.signUpForm.value.email})
         // localStorage['users'] = JSON.stringify(this.users);
-        this.http.post('http://localhost:8888/HireMe/Auth.php', this.signUpForm.value).subscribe(response => {console.log(response)})
+        this.http.post('http://localhost:8888/HireMe/Auth.php', this.signUpForm.value)
+        .subscribe((response:any) => {
+            console.log(response)
+            if(response.status === 200) {
+                console.log('I will go to Sign in');
+            } else {
+                this.message = response.message
+            }
+        })
     }
 
     confirmPassword() {
