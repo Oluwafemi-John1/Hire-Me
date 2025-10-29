@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Chart, registerables } from 'chart.js';
@@ -16,11 +16,20 @@ interface User {
 
 @Component({
     selector: 'app-admin-dashboard',
+    standalone: true,
     imports: [CommonModule, RouterLink],
     templateUrl: './admin-dashboard.html',
     styleUrl: './admin-dashboard.css'
 })
 export class AdminDashboard implements OnInit {
+    // Responsive sidebar state
+    isSidebarOpen = false;
+    isSidebarCollapsed = false;
+    private touchStartX = 0;
+    private touchStartY = 0;
+    private touchEndX = 0;
+    private readonly swipeThreshold = 60; // px
+    private readonly edgeZone = 30; // px from left edge
     // Platform Statistics
     stats = {
         totalUsers: 1547,
@@ -69,6 +78,11 @@ export class AdminDashboard implements OnInit {
         this.initializeCharts();
         this.initializeAOS();
     }
+
+    // Sidebar controls (mobile)
+    toggleSidebar() { this.isSidebarOpen = !this.isSidebarOpen; }
+    closeSidebar() { this.isSidebarOpen = false; }
+    toggleCollapse() { if (typeof window !== 'undefined' && window.innerWidth >= 992) this.isSidebarCollapsed = !this.isSidebarCollapsed; }
 
     initializeCharts() {
         // Revenue Chart (Bar)
@@ -200,5 +214,30 @@ export class AdminDashboard implements OnInit {
 
     getUserTypeClass(type: string): string {
         return type === 'customer' ? 'badge-customer' : 'badge-artisan';
+    }
+
+    // Swipe gesture support for mobile
+    @HostListener('window:touchstart', ['$event'])
+    onTouchStart(event: TouchEvent) {
+        if (typeof window === 'undefined' || window.innerWidth >= 992) return;
+        const touch = event.changedTouches[0];
+        this.touchStartX = touch.clientX;
+        this.touchStartY = touch.clientY;
+    }
+
+    @HostListener('window:touchend', ['$event'])
+    onTouchEnd(event: TouchEvent) {
+        if (typeof window === 'undefined' || window.innerWidth >= 992) return;
+        const touch = event.changedTouches[0];
+        this.touchEndX = touch.clientX;
+        const dx = this.touchEndX - this.touchStartX;
+
+        if (!this.isSidebarOpen && this.touchStartX <= this.edgeZone && dx > this.swipeThreshold) {
+            this.isSidebarOpen = true;
+            return;
+        }
+        if (this.isSidebarOpen && dx < -this.swipeThreshold) {
+            this.isSidebarOpen = false;
+        }
     }
 }

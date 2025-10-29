@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Chart, registerables } from 'chart.js';
@@ -16,11 +16,16 @@ interface Job {
 
 @Component({
     selector: 'app-artisan-dashboard',
+    standalone: true,
     imports: [CommonModule, RouterLink],
     templateUrl: './artisan-dashboard.html',
     styleUrl: './artisan-dashboard.css'
 })
 export class ArtisanDashboard implements OnInit {
+    // Sidebar state
+    isSidebarOpen = false;
+    isSidebarCollapsed = false;
+
     // Statistics
     stats = {
         totalJobs: 24,
@@ -31,43 +36,45 @@ export class ArtisanDashboard implements OnInit {
 
     // Recent Jobs
     recentJobs: Job[] = [
-        {
-            id: 'JOB001',
-            customer: 'John Doe',
-            service: 'Plumbing',
-            amount: 35000,
-            status: 'in-progress',
-            date: '2024-01-15'
-        },
-        {
-            id: 'JOB002',
-            customer: 'Jane Smith',
-            service: 'Electrical Work',
-            amount: 50000,
-            status: 'pending',
-            date: '2024-01-14'
-        },
-        {
-            id: 'JOB003',
-            customer: 'Mike Johnson',
-            service: 'Carpentry',
-            amount: 45000,
-            status: 'completed',
-            date: '2024-01-13'
-        },
-        {
-            id: 'JOB004',
-            customer: 'Sarah Williams',
-            service: 'Painting',
-            amount: 30000,
-            status: 'in-progress',
-            date: '2024-01-12'
-        }
+        { id: 'JOB001', customer: 'John Doe', service: 'Plumbing', amount: 35000, status: 'in-progress', date: '2024-01-15' },
+        { id: 'JOB002', customer: 'Jane Smith', service: 'Electrical Work', amount: 50000, status: 'pending', date: '2024-01-14' },
+        { id: 'JOB003', customer: 'Mike Johnson', service: 'Carpentry', amount: 45000, status: 'completed', date: '2024-01-13' },
+        { id: 'JOB004', customer: 'Sarah Williams', service: 'Painting', amount: 30000, status: 'in-progress', date: '2024-01-12' }
     ];
+
+    // Swipe support
+    private touchStartX = 0;
+    private touchStartY = 0;
+    private touchEndX = 0;
+    private readonly swipeThreshold = 60; // px
+    private readonly edgeZone = 30; // px
 
     ngOnInit() {
         this.initializeCharts();
         this.initializeAOS();
+    }
+
+    // Sidebar controls
+    toggleSidebar() { this.isSidebarOpen = !this.isSidebarOpen; }
+    closeSidebar() { this.isSidebarOpen = false; }
+    toggleCollapse() { if (typeof window !== 'undefined' && window.innerWidth >= 992) this.isSidebarCollapsed = !this.isSidebarCollapsed; }
+
+    @HostListener('window:touchstart', ['$event'])
+    onTouchStart(event: TouchEvent) {
+        if (typeof window === 'undefined' || window.innerWidth >= 992) return;
+        const t = event.changedTouches[0];
+        this.touchStartX = t.clientX;
+        this.touchStartY = t.clientY;
+    }
+
+    @HostListener('window:touchend', ['$event'])
+    onTouchEnd(event: TouchEvent) {
+        if (typeof window === 'undefined' || window.innerWidth >= 992) return;
+        const t = event.changedTouches[0];
+        this.touchEndX = t.clientX;
+        const dx = this.touchEndX - this.touchStartX;
+        if (!this.isSidebarOpen && this.touchStartX <= this.edgeZone && dx > this.swipeThreshold) { this.isSidebarOpen = true; return; }
+        if (this.isSidebarOpen && dx < -this.swipeThreshold) { this.isSidebarOpen = false; }
     }
 
     initializeCharts() {
@@ -90,20 +97,11 @@ export class ArtisanDashboard implements OnInit {
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: true,
-                            position: 'bottom'
-                        }
-                    },
+                    plugins: { legend: { display: true, position: 'bottom' } },
                     scales: {
                         y: {
                             beginAtZero: true,
-                            ticks: {
-                                callback: function (value) {
-                                    return '₦' + value.toLocaleString();
-                                }
-                            }
+                            ticks: { callback: function (value) { return '₦' + (value as number).toLocaleString(); } as any }
                         }
                     }
                 }
@@ -119,24 +117,11 @@ export class ArtisanDashboard implements OnInit {
                     labels: ['Completed', 'In Progress', 'Pending'],
                     datasets: [{
                         data: [19, 3, 2],
-                        backgroundColor: [
-                            'rgba(34, 197, 94, 0.8)',
-                            'rgba(245, 158, 11, 0.8)',
-                            'rgba(239, 68, 68, 0.8)'
-                        ],
+                        backgroundColor: ['rgba(34, 197, 94, 0.8)', 'rgba(245, 158, 11, 0.8)', 'rgba(239, 68, 68, 0.8)'],
                         borderWidth: 0
                     }]
                 },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: true,
-                            position: 'bottom'
-                        }
-                    }
-                }
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: true, position: 'bottom' } } }
             });
         }
     }
@@ -144,16 +129,10 @@ export class ArtisanDashboard implements OnInit {
     initializeAOS() {
         if (typeof window !== 'undefined') {
             import('aos').then(AOS => {
-                AOS.default.init({
-                    duration: 800,
-                    once: true,
-                    offset: 100
-                });
+                AOS.default.init({ duration: 800, once: true, offset: 100 });
             });
         }
     }
 
-    getStatusClass(status: string): string {
-        return `status-${status}`;
-    }
+    getStatusClass(status: string): string { return `status-${status}`; }
 }

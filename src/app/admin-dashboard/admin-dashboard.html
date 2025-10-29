@@ -1,65 +1,82 @@
 <div class="dashboard-wrapper">
     <!-- Sidebar -->
-    <aside class="sidebar">
+    <aside class="sidebar" [class.show]="isSidebarOpen" [class.collapsed]="isSidebarCollapsed">
         <div class="sidebar-header">
-            <div class="d-flex align-items-center gap-2">
-                <div class="logo-box bg-purple text-white rounded">
-                    <i class="bi bi-shield-check"></i>
+            <div class="d-flex align-items-center gap-2 justify-content-between">
+                <div class="d-flex align-items-center gap-2">
+                    <div class="logo-box bg-purple text-white rounded">
+                        <i class="bi bi-shield-check"></i>
+                    </div>
+                    <h5 class="mb-0 fw-bold sidebar-title">Admin Panel</h5>
                 </div>
-                <h5 class="mb-0 fw-bold">Admin Panel</h5>
+                <button type="button" class="btn btn-light btn-sm d-none d-lg-inline-flex collapse-toggle"
+                    (click)="toggleCollapse()" aria-label="Collapse sidebar">
+                    <i class="bi"
+                        [ngClass]="isSidebarCollapsed ? 'bi-chevron-double-right' : 'bi-chevron-double-left'"></i>
+                </button>
             </div>
         </div>
 
         <nav class="sidebar-nav">
             <a routerLink="/admin-dashboard" class="nav-item active">
                 <i class="bi bi-speedometer2"></i>
-                <span>Dashboard</span>
+                <span class="label">Dashboard</span>
             </a>
             <a routerLink="/admin-users" class="nav-item">
                 <i class="bi bi-people"></i>
-                <span>Users</span>
+                <span class="label">Users</span>
             </a>
             <a routerLink="/admin-artisans" class="nav-item">
                 <i class="bi bi-tools"></i>
-                <span>Artisans</span>
+                <span class="label">Artisans</span>
             </a>
             <a routerLink="/admin-customers" class="nav-item">
                 <i class="bi bi-person-badge"></i>
-                <span>Customers</span>
+                <span class="label">Customers</span>
             </a>
             <a routerLink="/admin-transactions" class="nav-item">
                 <i class="bi bi-cash-stack"></i>
-                <span>Transactions</span>
+                <span class="label">Transactions</span>
             </a>
             <a routerLink="/admin-reports" class="nav-item">
                 <i class="bi bi-bar-chart"></i>
-                <span>Reports</span>
+                <span class="label">Reports</span>
             </a>
             <a routerLink="/admin-settings" class="nav-item">
                 <i class="bi bi-gear"></i>
-                <span>Settings</span>
+                <span class="label">Settings</span>
             </a>
         </nav>
 
         <div class="sidebar-footer">
             <a routerLink="/homepage" class="nav-item text-danger">
                 <i class="bi bi-box-arrow-right"></i>
-                <span>Logout</span>
+                <span class="label">Logout</span>
             </a>
         </div>
     </aside>
+
+    <!-- Backdrop for mobile sidebar -->
+    <div class="backdrop" (click)="closeSidebar()" [class.show]="isSidebarOpen"></div>
 
     <!-- Main Content -->
     <main class="main-content">
         <!-- Top Bar -->
         <div class="top-bar" data-aos="fade-down">
             <div class="d-flex justify-content-between align-items-center">
-                <div>
-                    <h4 class="mb-1 fw-bold">Platform Overview 📊</h4>
-                    <p class="text-muted mb-0">Monitor and manage your platform performance</p>
+                <div class="d-flex align-items-center gap-2">
+                    <!-- Mobile menu toggle -->
+                    <button class="btn btn-light d-lg-none sidebar-toggle me-1" type="button" (click)="toggleSidebar()"
+                        aria-label="Toggle menu">
+                        <i class="bi bi-list"></i>
+                    </button>
+                    <div>
+                        <h4 class="mb-1 fw-bold">Platform Overview 📊</h4>
+                        <p class="text-muted mb-0">Monitor and manage your platform performance</p>
+                    </div>
                 </div>
                 <div class="d-flex align-items-center gap-3">
-                    <button class="btn btn-purple">
+                    <button class="btn btn-purple d-none d-lg-inline-flex">
                         <i class="bi bi-plus-circle me-2"></i>Export Report
                     </button>
                     <div class="notification-icon">
@@ -179,10 +196,10 @@
                                     <th>ID</th>
                                     <th>Name</th>
                                     <th>Type</th>
-                                    <th>Email</th>
+                                    <th class="d-none d-lg-table-cell">Email</th>
                                     <th>Status</th>
-                                    <th>Joined</th>
-                                    <th>Action</th>
+                                    <th class="d-none d-lg-table-cell">Joined</th>
+                                    <th class="d-none d-md-table-cell">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -200,14 +217,14 @@
                                             {{user.type}}
                                         </span>
                                     </td>
-                                    <td>{{user.email}}</td>
+                                    <td class="d-none d-lg-table-cell">{{user.email}}</td>
                                     <td>
                                         <span class="status-badge" [ngClass]="getStatusClass(user.status)">
                                             {{user.status}}
                                         </span>
                                     </td>
-                                    <td>{{user.joinedDate}}</td>
-                                    <td>
+                                    <td class="d-none d-lg-table-cell">{{user.joinedDate}}</td>
+                                    <td class="d-none d-md-table-cell">
                                         <button class="btn btn-sm btn-outline-purple">
                                             <i class="bi bi-three-dots-vertical"></i>
                                         </button>

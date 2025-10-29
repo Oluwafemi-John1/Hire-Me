@@ -1,65 +1,82 @@
 <div class="dashboard-wrapper">
     <!-- Sidebar -->
-    <aside class="sidebar">
+    <aside class="sidebar" [class.show]="isSidebarOpen" [class.collapsed]="isSidebarCollapsed">
         <div class="sidebar-header">
-            <div class="d-flex align-items-center gap-2">
-                <div class="logo-box bg-primary text-white rounded">
-                    <i class="bi bi-tools"></i>
+            <div class="d-flex align-items-center gap-2 justify-content-between">
+                <div class="d-flex align-items-center gap-2">
+                    <div class="logo-box bg-primary text-white rounded">
+                        <i class="bi bi-tools"></i>
+                    </div>
+                    <h5 class="mb-0 fw-bold sidebar-title">Artisan Portal</h5>
                 </div>
-                <h5 class="mb-0 fw-bold">Artisan Portal</h5>
+                <button type="button" class="btn btn-light btn-sm d-none d-lg-inline-flex collapse-toggle"
+                    (click)="toggleCollapse()" aria-label="Collapse sidebar">
+                    <i class="bi"
+                        [ngClass]="isSidebarCollapsed ? 'bi-chevron-double-right' : 'bi-chevron-double-left'"></i>
+                </button>
             </div>
         </div>
 
         <nav class="sidebar-nav">
             <a routerLink="/artisan-dashboard" class="nav-item active">
                 <i class="bi bi-speedometer2"></i>
-                <span>Dashboard</span>
+                <span class="label">Dashboard</span>
             </a>
             <a routerLink="/artisan-jobs" class="nav-item">
                 <i class="bi bi-briefcase"></i>
-                <span>My Jobs</span>
+                <span class="label">My Jobs</span>
             </a>
             <a routerLink="/artisan-earnings" class="nav-item">
                 <i class="bi bi-cash-stack"></i>
-                <span>Earnings</span>
+                <span class="label">Earnings</span>
             </a>
             <a routerLink="/artisan-profile" class="nav-item">
                 <i class="bi bi-person-badge"></i>
-                <span>Profile</span>
+                <span class="label">Profile</span>
             </a>
             <a routerLink="/artisan-portfolio" class="nav-item">
                 <i class="bi bi-folder"></i>
-                <span>Portfolio</span>
+                <span class="label">Portfolio</span>
             </a>
             <a routerLink="/artisan-messages" class="nav-item">
                 <i class="bi bi-chat-dots"></i>
-                <span>Messages</span>
+                <span class="label">Messages</span>
             </a>
             <a routerLink="/artisan-settings" class="nav-item">
                 <i class="bi bi-gear"></i>
-                <span>Settings</span>
+                <span class="label">Settings</span>
             </a>
         </nav>
 
         <div class="sidebar-footer">
             <a routerLink="/artisansignin" class="nav-item text-danger">
                 <i class="bi bi-box-arrow-right"></i>
-                <span>Logout</span>
+                <span class="label">Logout</span>
             </a>
         </div>
     </aside>
+
+    <!-- Backdrop for mobile sidebar -->
+    <div class="backdrop" (click)="closeSidebar()" [class.show]="isSidebarOpen"></div>
 
     <!-- Main Content -->
     <main class="main-content">
         <!-- Top Bar -->
         <div class="top-bar" data-aos="fade-down">
             <div class="d-flex justify-content-between align-items-center">
-                <div>
-                    <h4 class="mb-1 fw-bold">Welcome back, Chukwudi! 👋</h4>
-                    <p class="text-muted mb-0">Here's what's happening with your business today</p>
+                <div class="d-flex align-items-center gap-2">
+                    <!-- Mobile menu toggle -->
+                    <button class="btn btn-light d-lg-none sidebar-toggle me-1" type="button" (click)="toggleSidebar()"
+                        aria-label="Toggle menu">
+                        <i class="bi bi-list"></i>
+                    </button>
+                    <div>
+                        <h4 class="mb-1 fw-bold">Welcome back, Chukwudi! 👋</h4>
+                        <p class="text-muted mb-0">Here's what's happening with your business today</p>
+                    </div>
                 </div>
                 <div class="d-flex align-items-center gap-3">
-                    <button class="btn btn-primary">
+                    <button class="btn btn-primary d-none d-lg-inline-flex">
                         <i class="bi bi-plus-circle me-2"></i>Update Availability
                     </button>
                     <div class="notification-icon">
@@ -164,11 +181,11 @@
                         <tr>
                             <th>Job ID</th>
                             <th>Customer</th>
-                            <th>Service</th>
-                            <th>Amount</th>
+                            <th class="d-none d-md-table-cell">Service</th>
+                            <th class="d-none d-lg-table-cell">Amount</th>
                             <th>Status</th>
-                            <th>Date</th>
-                            <th>Action</th>
+                            <th class="d-none d-lg-table-cell">Date</th>
+                            <th class="d-none d-md-table-cell">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -181,15 +198,15 @@
                                     {{job.customer}}
                                 </div>
                             </td>
-                            <td>{{job.service}}</td>
-                            <td class="fw-semibold">₦{{job.amount.toLocaleString()}}</td>
+                            <td class="d-none d-md-table-cell">{{job.service}}</td>
+                            <td class="fw-semibold d-none d-lg-table-cell">₦{{job.amount.toLocaleString()}}</td>
                             <td>
                                 <span class="status-badge" [ngClass]="getStatusClass(job.status)">
                                     {{job.status}}
                                 </span>
                             </td>
-                            <td>{{job.date}}</td>
-                            <td>
+                            <td class="d-none d-lg-table-cell">{{job.date}}</td>
+                            <td class="d-none d-md-table-cell">
                                 <button class="btn btn-sm btn-outline-primary">
                                     <i class="bi bi-eye"></i>
                                 </button>

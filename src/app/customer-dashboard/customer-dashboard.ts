@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Chart, ChartConfiguration, ChartType, registerables } from 'chart.js';
@@ -25,6 +25,14 @@ interface Artisan {
 })
 export class CustomerDashboard implements OnInit {
     customerName = 'John Doe';
+    // Responsive sidebar state
+    isSidebarOpen = false;
+    isSidebarCollapsed = false;
+    private touchStartX = 0;
+    private touchStartY = 0;
+    private touchEndX = 0;
+    private readonly swipeThreshold = 60; // px
+    private readonly edgeZone = 30; // px from left edge
 
     // Statistics
     stats = {
@@ -56,6 +64,49 @@ export class CustomerDashboard implements OnInit {
             this.initSpendingChart();
             this.initCategoryChart();
         }, 100);
+    }
+
+    // Sidebar controls (mobile)
+    toggleSidebar() {
+        this.isSidebarOpen = !this.isSidebarOpen;
+    }
+
+    closeSidebar() {
+        this.isSidebarOpen = false;
+    }
+
+    toggleCollapse() {
+        // Only allow on desktop
+        if (typeof window !== 'undefined' && window.innerWidth >= 992) {
+            this.isSidebarCollapsed = !this.isSidebarCollapsed;
+        }
+    }
+
+    // Swipe gesture support for mobile
+    @HostListener('window:touchstart', ['$event'])
+    onTouchStart(event: TouchEvent) {
+        if (typeof window === 'undefined' || window.innerWidth >= 992) return;
+        const touch = event.changedTouches[0];
+        this.touchStartX = touch.clientX;
+        this.touchStartY = touch.clientY;
+    }
+
+    @HostListener('window:touchend', ['$event'])
+    onTouchEnd(event: TouchEvent) {
+        if (typeof window === 'undefined' || window.innerWidth >= 992) return;
+        const touch = event.changedTouches[0];
+        this.touchEndX = touch.clientX;
+        const dx = this.touchEndX - this.touchStartX;
+
+        // Open when swipe right from left edge
+        if (!this.isSidebarOpen && this.touchStartX <= this.edgeZone && dx > this.swipeThreshold) {
+            this.isSidebarOpen = true;
+            return;
+        }
+        // Close when swipe left while open
+        if (this.isSidebarOpen && dx < -this.swipeThreshold) {
+            this.isSidebarOpen = false;
+        }
     }
 
     initSpendingChart() {

@@ -1,61 +1,79 @@
 <div class="dashboard-wrapper">
     <!-- Sidebar -->
-    <aside class="sidebar" data-aos="fade-right">
+    <aside class="sidebar" data-aos="fade-right" [class.show]="isSidebarOpen" [class.collapsed]="isSidebarCollapsed">
         <div class="sidebar-header">
-            <div class="d-flex align-items-center gap-2">
-                <div class="logo-box bg-success rounded">
-                    <i class="bi bi-briefcase-fill text-white"></i>
+            <div class="d-flex align-items-center gap-2 justify-content-between">
+                <div class="d-flex align-items-center gap-2">
+                    <div class="logo-box bg-success rounded">
+                        <i class="bi bi-briefcase-fill text-white"></i>
+                    </div>
+                    <span class="fw-bold fs-5 sidebar-title">HireMe</span>
                 </div>
-                <span class="fw-bold fs-5">HireMe</span>
+                <!-- Collapse toggle (desktop) -->
+                <button type="button" class="btn btn-light btn-sm d-none d-lg-inline-flex collapse-toggle"
+                    (click)="toggleCollapse()" aria-label="Collapse sidebar">
+                    <i class="bi"
+                        [ngClass]="isSidebarCollapsed ? 'bi-chevron-double-right' : 'bi-chevron-double-left'"></i>
+                </button>
             </div>
         </div>
 
         <nav class="sidebar-nav mt-4">
             <a href="#" class="nav-item active">
                 <i class="bi bi-speedometer2"></i>
-                <span>Dashboard</span>
+                <span class="label">Dashboard</span>
             </a>
             <a href="#" class="nav-item">
                 <i class="bi bi-people"></i>
-                <span>My Artisans</span>
+                <span class="label">My Artisans</span>
             </a>
             <a href="#" class="nav-item">
                 <i class="bi bi-folder"></i>
-                <span>Projects</span>
+                <span class="label">Projects</span>
             </a>
             <a href="#" class="nav-item">
                 <i class="bi bi-wallet2"></i>
-                <span>Payments</span>
+                <span class="label">Payments</span>
             </a>
             <a href="#" class="nav-item">
                 <i class="bi bi-chat-dots"></i>
-                <span>Messages</span>
+                <span class="label">Messages</span>
             </a>
             <a href="#" class="nav-item">
                 <i class="bi bi-gear"></i>
-                <span>Settings</span>
+                <span class="label">Settings</span>
             </a>
         </nav>
 
         <div class="sidebar-footer">
             <a routerLink="/signin" class="nav-item text-danger">
                 <i class="bi bi-box-arrow-left"></i>
-                <span>Logout</span>
+                <span class="label">Logout</span>
             </a>
         </div>
     </aside>
+
+    <!-- Backdrop for mobile sidebar -->
+    <div class="backdrop" (click)="closeSidebar()" [class.show]="isSidebarOpen"></div>
 
     <!-- Main Content -->
     <main class="main-content">
         <!-- Top Bar -->
         <header class="top-bar" data-aos="fade-down">
             <div class="d-flex justify-content-between align-items-center">
-                <div>
-                    <h4 class="mb-0 fw-bold">Welcome back, {{customerName}}!</h4>
-                    <p class="text-secondary small mb-0">Here's what's happening with your projects</p>
+                <div class="d-flex align-items-center gap-2">
+                    <!-- Mobile menu toggle -->
+                    <button class="btn btn-light d-lg-none sidebar-toggle me-1" type="button" (click)="toggleSidebar()"
+                        aria-label="Toggle menu">
+                        <i class="bi bi-list"></i>
+                    </button>
+                    <div>
+                        <h4 class="mb-0 fw-bold">Welcome back, {{customerName}}!</h4>
+                        <p class="text-secondary small mb-0">Here's what's happening with your projects</p>
+                    </div>
                 </div>
                 <div class="d-flex gap-3 align-items-center">
-                    <button class="btn btn-success">
+                    <button class="btn btn-success d-none d-lg-inline-flex">
                         <i class="bi bi-plus-lg me-2"></i>Hire Artisan
                     </button>
                     <div class="notification-icon">
@@ -157,10 +175,10 @@
                             <tr>
                                 <th>Artisan</th>
                                 <th>Skill</th>
-                                <th>Rating</th>
-                                <th>Status</th>
-                                <th>Amount</th>
-                                <th>Action</th>
+                                <th class="d-none d-md-table-cell">Rating</th>
+                                <th class="d-none d-md-table-cell">Status</th>
+                                <th class="d-none d-md-table-cell">Amount</th>
+                                <th class="d-none d-md-table-cell">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -173,19 +191,19 @@
                                     </div>
                                 </td>
                                 <td>{{artisan.skill}}</td>
-                                <td>
+                                <td class="d-none d-md-table-cell">
                                     <div class="d-flex align-items-center gap-1">
                                         <i class="bi bi-star-fill text-warning"></i>
                                         <span>{{artisan.rating}}</span>
                                     </div>
                                 </td>
-                                <td>
+                                <td class="d-none d-md-table-cell">
                                     <span class="status-badge" [ngClass]="getStatusClass(artisan.status)">
                                         {{artisan.status}}
                                     </span>
                                 </td>
-                                <td class="fw-semibold">₦{{artisan.amount | number}}</td>
-                                <td>
+                                <td class="fw-semibold d-none d-md-table-cell">₦{{artisan.amount | number}}</td>
+                                <td class="d-none d-md-table-cell">
                                     <button class="btn btn-sm btn-outline-success">View</button>
                                 </td>
                             </tr>
