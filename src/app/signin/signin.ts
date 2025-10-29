@@ -1,8 +1,9 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import * as AOS from 'aos';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
     selector: 'app-signin',
@@ -12,8 +13,11 @@ import * as AOS from 'aos';
 })
 export class Signin implements OnInit {
     private builder = inject(FormBuilder)
+    private router = inject(Router)
+    private http = inject(HttpClient)
     errorMessage: string = ''
     showError: boolean = false
+
 
     ngOnInit() {
         AOS.init({
@@ -34,13 +38,24 @@ export class Signin implements OnInit {
 
         console.log(this.signInForm);
 
-        // Simulate login validation
-        if (this.signInForm.valid) {
-            // Add your login logic here
-            // Example error handling:
-            // this.errorMessage = 'Invalid email or password. Please try again.';
-            // this.showError = true;
-        }
+        this.http.post('http://localhost:8888/HireMe/Auth.php', this.signInForm.value)
+            .subscribe({
+                next: (response: any) => {
+                    console.log(response)
+                    if (response.status === 200) {
+                        console.log('I will go to Dashboard');
+                        // this.router.navigate(['/signin'])
+                    } else {
+                        this.errorMessage = response.message || 'Sign in failed. Please try again.';
+                        this.showError = true;
+                    }
+                },
+                error: (error) => {
+                    this.errorMessage = 'An error occurred. Please check your connection and try again.';
+                    this.showError = true;
+                    console.error('Error:', error);
+                }
+            })
     }
 
 }
