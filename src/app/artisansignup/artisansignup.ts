@@ -49,12 +49,16 @@ export class Artisansignup implements OnInit {
             .subscribe({
                 next: (response: any) => {
                     console.log(response);
-                    if (response.status !== 200) {
+                    if (response.status === 200) {
+                        console.log('I will go to Sign in');
+                        // this.router.navigate(['/signin'])
+                    } else {
                         this.errorMessage = response.message || 'Registration failed. Please try again.';
                         this.showError = true;
                     }
                 },
                 error: (error) => {
+                    console.log(error);
                     this.errorMessage = 'An error occurred. Please check your connection and try again.';
                     this.showError = true;
                     console.error('Error:', error);
