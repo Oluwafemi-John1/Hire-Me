@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import * as AOS from 'aos';
 
@@ -15,6 +15,7 @@ import * as AOS from 'aos';
 export class Artisansignup implements OnInit {
     private builder = inject(FormBuilder);
     private http = inject(HttpClient)
+    private router = inject(Router)
     users: any = [];
     sameAs: boolean = false
     errorMessage: string = ''
@@ -51,7 +52,7 @@ export class Artisansignup implements OnInit {
                     console.log(response);
                     if (response.status === 200) {
                         console.log('I will go to Sign in');
-                        // this.router.navigate(['/signin'])
+                        this.router.navigate(['/artisansignin'])
                     } else {
                         this.errorMessage = response.message || 'Registration failed. Please try again.';
                         this.showError = true;
