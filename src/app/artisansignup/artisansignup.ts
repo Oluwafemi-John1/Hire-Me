@@ -2,11 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import * as AOS from 'aos';
 
 @Component({
     selector: 'app-artisansignup',
-    imports: [FormsModule, ReactiveFormsModule, RouterLink],
+    imports: [FormsModule, ReactiveFormsModule, RouterLink, CommonModule],
     templateUrl: './artisansignup.html',
     styleUrl: './artisansignup.css',
     standalone: true
@@ -16,6 +17,8 @@ export class Artisansignup implements OnInit {
     private http = inject(HttpClient)
     users: any = [];
     sameAs: boolean = false
+    errorMessage: string = ''
+    showError: boolean = false
 
     ngOnInit() {
         AOS.init({
@@ -37,9 +40,26 @@ export class Artisansignup implements OnInit {
 
 
     register() {
+        this.showError = false;
+        this.errorMessage = '';
+
         this.users.push(this.signUpForm.value)
         // localStorage['artisans'] = JSON.stringify(this.users);
-        this.http.post('http://localhost:8888/HireMe/ArtisanAuth.php', this.signUpForm.value).subscribe(response => { console.log(response) })
+        this.http.post('http://localhost:8888/HireMe/ArtisanAuth.php', this.signUpForm.value)
+            .subscribe({
+                next: (response: any) => {
+                    console.log(response);
+                    if (response.status !== 200) {
+                        this.errorMessage = response.message || 'Registration failed. Please try again.';
+                        this.showError = true;
+                    }
+                },
+                error: (error) => {
+                    this.errorMessage = 'An error occurred. Please check your connection and try again.';
+                    this.showError = true;
+                    console.error('Error:', error);
+                }
+            })
     }
 
     confirmPassword() {

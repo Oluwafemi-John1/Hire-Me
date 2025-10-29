@@ -1,16 +1,19 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import * as AOS from 'aos';
 
 @Component({
     selector: 'app-artisansignin',
-    imports: [ReactiveFormsModule, FormsModule, RouterLink],
+    imports: [ReactiveFormsModule, FormsModule, RouterLink, CommonModule],
     templateUrl: './artisansignin.html',
     styleUrl: './artisansignin.css'
 })
 export class Artisansignin implements OnInit {
     private builder = inject(FormBuilder)
+    errorMessage: string = ''
+    showError: boolean = false
 
     ngOnInit() {
         AOS.init({
@@ -26,6 +29,17 @@ export class Artisansignin implements OnInit {
     })
 
     logIn() {
+        this.showError = false;
+        this.errorMessage = '';
+
         console.log(this.signInForm);
+
+        // Simulate login validation
+        if (this.signInForm.valid) {
+            // Add your login logic here
+            // Example error handling:
+            // this.errorMessage = 'Invalid email or password. Please try again.';
+            // this.showError = true;
+        }
     }
 }
