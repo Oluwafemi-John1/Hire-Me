@@ -17,6 +17,7 @@
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
     position: fixed;
     height: 100vh;
+    overflow-x: hidden;
     overflow-y: auto;
     z-index: 1000;
     transition: transform 0.3s ease;
@@ -37,13 +38,42 @@
     justify-content: center;
 }
 
+.sidebar.collapsed .sidebar-header {
+    flex-direction: column;
+    justify-content: center;
+}
+
+.sidebar.collapsed .sidebar-header .d-flex {
+    justify-content: center;
+}
+
+.sidebar.collapsed .logo-box {
+    margin: 0;
+}
+
+.sidebar.collapsed .collapse-toggle {
+    margin-top: 0.5rem !important;
+    width: 100%;
+    justify-content: center;
+}
+
 .collapse-toggle {
     border: 1px solid #e5e7eb;
+    flex-shrink: 0;
 }
 
 .sidebar-header {
     padding: 1.5rem;
     border-bottom: 1px solid #e5e7eb;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sidebar-header .d-flex {
+    max-width: 100%;
+    transition: justify-content 0.3s ease;
 }
 
 .logo-box {

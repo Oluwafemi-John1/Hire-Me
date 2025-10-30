@@ -2,20 +2,17 @@
     <!-- Sidebar -->
     <aside class="sidebar" [class.show]="isSidebarOpen" [class.collapsed]="isSidebarCollapsed">
         <div class="sidebar-header">
-            <div class="d-flex align-items-center gap-2 justify-content-between">
-                <div class="d-flex align-items-center gap-2">
-                    <div class="logo-box bg-success rounded">
-                        <i class="bi bi-briefcase-fill text-white"></i>
-                    </div>
-                    <span class="fw-bold fs-5 sidebar-title">HireMe</span>
+            <div class="d-flex align-items-center gap-2">
+                <div class="logo-box bg-success rounded">
+                    <i class="bi bi-briefcase-fill text-white"></i>
                 </div>
-                <!-- Collapse toggle (desktop) -->
-                <button type="button" class="btn btn-light btn-sm d-none d-lg-inline-flex collapse-toggle"
-                    (click)="toggleCollapse()" aria-label="Collapse sidebar">
-                    <i class="bi"
-                        [ngClass]="isSidebarCollapsed ? 'bi-chevron-double-right' : 'bi-chevron-double-left'"></i>
-                </button>
+                <span class="fw-bold fs-5 sidebar-title">HireMe</span>
             </div>
+            <!-- Collapse toggle (desktop) -->
+            <button type="button" class="btn btn-light btn-sm d-none d-lg-flex collapse-toggle mt-2"
+                (click)="toggleCollapse()" aria-label="Collapse sidebar">
+                <i class="bi" [ngClass]="isSidebarCollapsed ? 'bi-chevron-double-right' : 'bi-chevron-double-left'"></i>
+            </button>
         </div>
 
         <nav class="sidebar-nav mt-4">
