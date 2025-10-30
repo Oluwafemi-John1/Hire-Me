@@ -101,7 +101,11 @@ export class ArtisanDashboard implements OnInit {
                     scales: {
                         y: {
                             beginAtZero: true,
-                            ticks: { callback: function (value) { return '₦' + (value as number).toLocaleString(); } as any }
+                            ticks: {
+                                callback: function (value: number | string) {
+                                    return '₦' + (value as number).toLocaleString();
+                                }
+                            }
                         }
                     }
                 }
