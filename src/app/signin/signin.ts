@@ -38,13 +38,13 @@ export class Signin implements OnInit {
 
         console.log(this.signInForm);
 
-        this.http.post('http://localhost:8888/HireMe/Auth.php', this.signInForm.value)
+        this.http.post('http://localhost:8888/HireMe/auth/login', this.signInForm.value)
             .subscribe({
                 next: (response: any) => {
                     console.log(response)
                     if (response.status === 200) {
                         console.log('I will go to Dashboard');
-                        this.router.navigate(['/dashboard'])
+                        // this.router.navigate(['/dashboard'])
                     } else {
                         this.errorMessage = response.message || 'Sign in failed. Please try again.';
                         this.showError = true;
