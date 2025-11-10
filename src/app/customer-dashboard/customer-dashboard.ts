@@ -84,12 +84,16 @@ export class CustomerDashboard implements OnInit {
             this.payload = jwtDecode<JwtPayload>(token);
             this.customerName = this.payload.first_name;
             console.log(this.payload.user_id);
-            
         }
     }
 
     logOut() {
-        
+        localStorage.removeItem('token');
+        this._http.post('http://localhost:8888/HireMe/auth/logout', {customer_id: this.payload.user_id})
+        .subscribe(response => {
+            // route the user to the homepage
+            this._router.navigate(['/'])
+        })
     }
 
     // Sidebar controls (mobile)
