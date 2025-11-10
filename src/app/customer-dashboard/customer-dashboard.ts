@@ -1,8 +1,11 @@
-import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, inject, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Chart, ChartConfiguration, ChartType, registerables } from 'chart.js';
 import * as AOS from 'aos';
+import { jwtDecode } from 'jwt-decode';
+import { HttpClient } from '@angular/common/http';
+
 
 Chart.register(...registerables);
 
@@ -16,6 +19,14 @@ interface Artisan {
     amount: number;
 }
 
+interface JwtPayload {
+    user_id: Number,
+    email: String,
+    first_name: String,
+    role: String,
+    iat: Number,
+    exp: Number
+}
 @Component({
     selector: 'app-customer-dashboard',
     imports: [CommonModule, RouterLink],
@@ -24,7 +35,10 @@ interface Artisan {
     standalone: true
 })
 export class CustomerDashboard implements OnInit {
-    customerName = 'John Doe';
+    customerName = '';
+    payload:any = "";
+    private _http = inject(HttpClient);
+    private _router = inject(Router)
     // Responsive sidebar state
     isSidebarOpen = false;
     isSidebarCollapsed = false;
@@ -53,7 +67,7 @@ export class CustomerDashboard implements OnInit {
     spendingChart: any;
     categoryChart: any;
 
-    ngOnInit() {
+    ngOnInit(): void {
         AOS.init({
             duration: 800,
             once: true,
@@ -64,6 +78,18 @@ export class CustomerDashboard implements OnInit {
             this.initSpendingChart();
             this.initCategoryChart();
         }, 100);
+
+        const token = localStorage['token'];
+        if(token) {
+            this.payload = jwtDecode<JwtPayload>(token);
+            this.customerName = this.payload.first_name;
+            console.log(this.payload.user_id);
+            
+        }
+    }
+
+    logOut() {
+        
     }
 
     // Sidebar controls (mobile)

@@ -43,7 +43,8 @@ export class Signin implements OnInit {
                 next: (response: any) => {
                     console.log(response)
                     if (response.status === 200) {
-                        console.log('I will go to Dashboard');
+                        // console.log('I will go to Dashboard');
+                        localStorage['token'] = response.token
                         this.router.navigate(['/dashboard'])
                     } else {
                         this.errorMessage = response.message || 'Sign in failed. Please try again.';
