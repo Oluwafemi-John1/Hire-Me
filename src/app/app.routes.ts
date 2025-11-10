@@ -7,6 +7,7 @@ import { Artisansignin } from './artisansignin/artisansignin';
 import { ArtisanDashboard } from './artisan-dashboard/artisan-dashboard';
 import { AdminDashboard } from './admin-dashboard/admin-dashboard';
 import { CustomerDashboard } from './customer-dashboard/customer-dashboard';
+import { authGuardGuard } from './auth-guard-guard';
 
 export const routes: Routes = [
     {path: 'signup', component: Signup},
@@ -16,5 +17,5 @@ export const routes: Routes = [
     {path: 'artisansignin', component: Artisansignin},
     {path: 'artisandashboard', component: ArtisanDashboard},
     {path: 'admindashboard', component: AdminDashboard},
-    {path: 'dashboard', component: CustomerDashboard}
+    {path: 'dashboard', component: CustomerDashboard, canActivate: [authGuardGuard]}
 ];
