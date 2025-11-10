@@ -35,7 +35,7 @@ export class Artisansignin implements OnInit {
         this.showError = false;
         this.errorMessage = '';
 
-        this.http.post('http://localhost:8888/HireMe/ArtisanAuth.php', this.signInForm.value)
+        this.http.post('http://localhost:8888/HireMe/auth/artisanlogin', this.signInForm.value)
             .subscribe({
                 next: (response: any) => {
                     console.log(response)
